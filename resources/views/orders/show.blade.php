@@ -11,10 +11,10 @@
 			<thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Quantity</th>
+                    <th>Nama Barang</th>
+                    <th>Jumlah</th>
                     <th>UoM</th>
-                    <th>Price</th>
+                    <th>Harga</th>
                     <th>Total</th>
                 </tr>
             </thead>

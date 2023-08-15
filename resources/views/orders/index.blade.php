@@ -30,7 +30,7 @@
         </form>
         </div>
         <div>
-        <a href="{{route('cart.index')}}" class="btn btn-primary">Open POS</a>
+        <a href="{{route('cart.index')}}" class="btn btn-primary">Transaksi Baru</a>
         </div>
         </div>
     </div>
@@ -41,11 +41,11 @@
                     <th>No Invoice</th>
                     <th>Kasir</th>
                     <th>Total</th>
-                    <th>Received Amount</th>
+                    <th>Uang Diterima</th>
                     <th>Status</th>
-                    <th>To Pay</th>
-                    <th>Created At</th>
-					<th>Actions</th>
+                    <th>Kembalian</th>
+                    <th>Dibuat Pada</th>
+					<th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,18 +54,18 @@
                     <td>{{
                         'SO-' . $order->created_at->format('Y') . '/' . $order->created_at->format('dm') . '/' . str_pad($order->id, 4, '0', STR_PAD_LEFT)
                     }}</td>
-                    <td></td>
-                    <td>{{ config('settings.currency_symbol') }} {{$order->formattedTotal()}}</td>
+                    <td>{{ $order->user->name }}</td>
+                    <td>{{ config('settings.currency_symbol') }} {{ $order->formattedTotal() }}</td>
                     <td>{{ config('settings.currency_symbol') }} {{$order->formattedReceivedAmount()}}</td>
                     <td>
                         @if($order->receivedAmount() == 0)
-                            <span class="badge badge-danger">Not Paid</span>
+                            <span class="badge badge-danger">Belum Dibayar</span>
                         @elseif($order->receivedAmount() < $order->total())
-                            <span class="badge badge-warning">Partial</span>
+                            <span class="badge badge-warning">Belum Lunas</span>
                         @elseif($order->receivedAmount() == $order->total())
-                            <span class="badge badge-success">Paid</span>
+                            <span class="badge badge-success">Lunas</span>
                         @elseif($order->receivedAmount() > $order->total())
-                            <span class="badge badge-info">Change</span>
+                            <span class="badge badge-info">Kembalian</span>
                         @endif
                     </td>
                     <td>{{config('settings.currency_symbol')}} {{number_format($order->total() - $order->receivedAmount(), 2)}}</td>

@@ -340,16 +340,7 @@ class Cart extends Component {
                                         />
                                     </form>
                                 </div>
-                                <div className="col-md-6">
-                                    <select
-                                        className="form-control"
-                                        onChange={this.handleOnSalesTypeChange}
-                                    >
-                                        <option value="">Jenis Penjualan</option>
-                                        <option value="retail">Eceran</option>
-                                        <option value="grocery">Grosir</option>
-                                    </select>
-                                </div>
+                                
                             </div>
                             <div className="user-cart">
                                 <div className="card overflow-auto">
