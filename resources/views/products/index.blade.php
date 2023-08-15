@@ -74,6 +74,12 @@
                         <button class="btn btn-sm btn-danger btn-delete" href="{{ URL::to('delete_products/'.$product->id) }}" id="delete"><i
                                 class="fas fa-trash"></i></button>
                         @endif
+                        @if (Auth::user()->role == 2 )
+                        <button href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-primary" disabled><i
+                                class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-danger btn-delete" href="{{ URL::to('delete_products/'.$product->id) }}" id="delete" disabled><i
+                                class="fas fa-trash"></i></button>
+                        @endif
                     </td> 
                 </tr>
                 @endforeach

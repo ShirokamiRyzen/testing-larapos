@@ -46,7 +46,7 @@
             <i class="ion ion-bag"></i>
           </div>
           <div class="small-box">
-          <a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="/orders" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
           <div class="icon">
             <i class="ion ion-stats-bars"></i>
           </div>
-          <a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="/orders" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -108,7 +108,7 @@
             <i class="ion ion-bag"></i>
           </div>
           <div class="small-box">
-          <a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="/orders" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@
           <div class="icon">
             <i class="ion ion-stats-bars"></i>
           </div>
-          <a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="/orders" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->

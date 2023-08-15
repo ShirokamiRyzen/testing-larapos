@@ -7,7 +7,7 @@
 
 <div class="card">
     <div class="card-body">
-
+        @if (Auth::user()->role == 1 )
         <form action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -102,6 +102,103 @@
             <button class="btn btn-primary" type="submit">Update</button>
             <a href="/products" class="btn btn-danger">Batal</a>
         </form>
+        @endif
+        @if (Auth::user()->role == 2 )
+        <form action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <div class="form-group">
+                <label for="name">Nama</label>
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name"
+                    placeholder="Nama Barang" value="{{ old('name', $product->name) }}" disabled>
+                @error('name')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+
+            <div class="form-group">
+                <label for="description">Deskripsi</label>
+                <textarea name="description" class="form-control @error('description') is-invalid @enderror"
+                    id="description"
+                    placeholder="Deskripsi (opsional)" disabled>{{ old('description', $product->description) }}</textarea>
+                @error('description')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="barcode">Barcode</label>
+                <input type="text" name="barcode" class="form-control @error('barcode') is-invalid @enderror"
+                    id="barcode" placeholder="barcode" value="{{ old('barcode', $product->barcode) }}" disabled>
+                @error('barcode')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="price">Harga Jual</label>
+                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" id="price"
+                    placeholder="Harga" value="{{ old('price', $product->price) }}" disabled>
+                @error('price')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Jumlah Barang</label>
+                <input type="text" name="quantity" class="form-control @error('quantity') is-invalid @enderror"
+                    id="quantity" placeholder="Jumlah" value="{{ old('quantity', $product->quantity) }}" disabled>
+                @error('quantity')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="uom">UoM</label>
+
+                <select name="uom" class="form-control select @error('uom') is-invalid @enderror" style="height: 5rem" id="uom" disabled>
+                    @foreach (\App\Models\Product::UOM as $uom => $value)
+                    <option value="{{ $uom }}" {{ old('uom', $product->uom) == $uom ? 'selected' : '' }}>
+                        {{ $uom }}</option>
+                    @endforeach
+                </select>
+
+                @error('quantity')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select name="status" class="form-control @error('status') is-invalid @enderror" id="status" disabled>
+                    <option value="1" {{ old('status', $product->status) === 1 ? 'selected' : ''}}>Aktif</option>
+                    <option value="0" {{ old('status', $product->status) === 0 ? 'selected' : ''}}>Tidak Aktif</option>
+                </select>
+                @error('status')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <button class="btn btn-primary" type="submit" disabled>Update</button>
+            <a href="/products" class="btn btn-danger">Batal</a>
+        </form>
+        @endif
     </div>
 </div>
 @endsection

@@ -18,7 +18,7 @@ class Cart extends Component {
             customer_id: "",
             type_payment: "",
             sales_type: "retail",
-            showDueDate : false,
+            showDueDate: false,
             showModal: false,
             options: [],
             productsAutoComplete: []
@@ -113,17 +113,17 @@ class Cart extends Component {
         if (qty < 1 || qty == 0) {
             console.log("delete " + product_id);
             this.handleClickDelete(product_id);
-        } else if(qty > 0) {
+        } else if (qty > 0) {
             const cart = this.state.cart.map((c) => {
                 if (c.id === product_id) {
                     c.pivot.quantity = qty;
                 }
                 return c;
             });
-    
+
             this.setState({ cart });
             if (!qty) return;
-    
+
             localStorage.setItem("cart", JSON.stringify(cart));
         }
     }
@@ -145,12 +145,12 @@ class Cart extends Component {
         this.setState({ cart: [] });
     }
     handleChangeSearch(event) {
-        if(event.target.value) {
+        if (event.target.value) {
             this.loadProductsAutoComplete(event.target.value);
-        }else
+        } else
             this.setState({ productsAutoComplete: [] });
 
-         if (event.keyCode === 13) {
+        if (event.keyCode === 13) {
             this.loadProducts(event.target.value);
         }
     }
@@ -205,7 +205,7 @@ class Cart extends Component {
         if (event.target.value == "due_date") {
             this.setState({ showDueDate: true });
         }
-        if(event.target.value == "cash") {
+        if (event.target.value == "cash") {
             this.setState({ showDueDate: false });
         }
         this.setState({ type_payment: event.target.value });
@@ -226,21 +226,21 @@ class Cart extends Component {
         var due_date = document.getElementById("due_date").value
 
         return await axios
-        .post("/orders", {
-            customer_id: this.state.customer_id,
-            amount: amount,
-            due_date: due_date ?? null,
-            cart: this.state.cart
-        })
-        .then((res) => {
-            localStorage.removeItem("cart");
-            this.loadCart();
-            this.setState({ showModal: false });
-            return res.data;
-        })
-        .catch((err) => {
-            Swal.showValidationMessage(err.response.data.message);
-        });
+            .post("/orders", {
+                customer_id: this.state.customer_id,
+                amount: amount,
+                due_date: due_date ?? null,
+                cart: this.state.cart
+            })
+            .then((res) => {
+                localStorage.removeItem("cart");
+                this.loadCart();
+                this.setState({ showModal: false });
+                return res.data;
+            })
+            .catch((err) => {
+                Swal.showValidationMessage(err.response.data.message);
+            });
     }
 
     handleClickSubmit() {
@@ -340,7 +340,7 @@ class Cart extends Component {
                                         />
                                     </form>
                                 </div>
-                                
+
                             </div>
                             <div className="user-cart">
                                 <div className="card overflow-auto">
@@ -457,16 +457,16 @@ class Cart extends Component {
                                     onChange={this.handleChangeSearch}
                                 />
                                 {productsAutoComplete && (
-                                    <div className="bg-white w-100 shadow" style={{position: 'absolute', zIndex: '999999'}}>
+                                    <div className="bg-white w-100 shadow" style={{ position: 'absolute', zIndex: '999999' }}>
                                         <div className="">
                                             {productsAutoComplete.map((item, index) => (
                                                 <div
-                                                onClick={() => {
-                                                    this.addProductToCart(item.barcode)
-                                                    this.setState({ productsAutoComplete: null });
-                                                }}
-                                                key={index} className="px-3 pt-3 hover-bg-list border-bottom" style={{cursor: 'pointer'}}>
-                                                    <div style={{fontWeight: 'bold', fontSize: '18px'}}>{item.name}</div>
+                                                    onClick={() => {
+                                                        this.addProductToCart(item.barcode)
+                                                        this.setState({ productsAutoComplete: null });
+                                                    }}
+                                                    key={index} className="px-3 pt-3 hover-bg-list border-bottom" style={{ cursor: 'pointer' }}>
+                                                    <div style={{ fontWeight: 'bold', fontSize: '18px' }}>{item.name}</div>
                                                     <p>Stok : {item.quantity}</p>
                                                 </div>
                                             ))}
@@ -475,31 +475,33 @@ class Cart extends Component {
                                 )}
                             </div>
                             <div className="row">
-                                {products.map((p) => (
-                                    <div className="col-md-4 mt-3" key={p.id} role="button">
-                                        <div
-                                            onClick={() => this.addProductToCart(p.barcode)}
-                                            className="card h-100"
-                                        >
-                                            <div className="card-body bg-hovered">
-                                                <h5
-                                                    style={
-                                                        window.APP.warning_quantity > p.quantity
-                                                            ? { color: "red" }
-                                                            : {}
-                                                    }
-                                                >
-                                                    <strong>
-                                                        {p.name}
-                                                    </strong>
-                                                    <p className="text-muted mt-2">
-                                                        Stok : {p.quantity}
-                                                    </p>
-                                                </h5>
+                                {products
+                                    .filter(p => p.status === 1) // Filter only active products
+                                    .map(p => (
+                                        <div className="col-md-4 mt-3" key={p.id} role="button">
+                                            <div
+                                                onClick={() => this.addProductToCart(p.barcode)}
+                                                className="card h-100"
+                                            >
+                                                <div className="card-body bg-hovered">
+                                                    <h5
+                                                        style={
+                                                            window.APP.warning_quantity > p.quantity
+                                                                ? { color: "red" }
+                                                                : {}
+                                                        }
+                                                    >
+                                                        <strong>
+                                                            {p.name}
+                                                        </strong>
+                                                        <p className="text-muted mt-2">
+                                                            Stok : {p.quantity}
+                                                        </p>
+                                                    </h5>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))}
                             </div>
                         </div>
                     </div>
