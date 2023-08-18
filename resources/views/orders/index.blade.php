@@ -78,6 +78,8 @@
 					<a href="#" class="btn btn-warning">
                         <i class="fas fa-print"></i>
                     </a>
+                    <button class="btn btn btn-danger btn-delete" href="{{ URL::to('delete_order/'.$order->id) }}" id="delete"><i
+                        class="fas fa-trash"></i></button>
 					</td>
                 </tr>
                 @endforeach

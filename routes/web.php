@@ -38,6 +38,8 @@ Route::post('/cart/change-qty', [CartController::class, 'changeQty'])->middlewar
 Route::delete('/cart/delete', [CartController::class, 'delete'])->middleware('checkUserRole:1,2');
 Route::delete('/cart/empty', [CartController::class, 'empty'])->middleware('checkUserRole:1,2');
 Route::resource('orders', OrderController::class)->middleware('checkUserRole:1,2');
+Route::get('/delete_order/{id}', [App\Http\Controllers\OrderController::class,'TransactionDelete'])->middleware('checkUserRole:1');
+
 
 //User Account Routes
 Route::post('/change_role/{id}', [App\Http\Controllers\UsermanagementController::class,'changeRole'])->name('user.changeRole')->middleware('checkUserRole:1');

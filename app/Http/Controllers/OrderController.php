@@ -137,17 +137,29 @@ class OrderController extends Controller
     }
 
     public function show_purchase($orders)
-{
-    //$orders = Order::all();
-    $orders = OrderItem::where('order_id', $orders)->get();
-    //$total = $orders->sum('total()');
-    $total = $orders->map(function ($i) {
-        return $i->product->purchase_price * $i->quantity;
-    })->sum();
-    return view('orders_purchase.show', compact('orders', 'total'));
-    //dd($orders);
-    //return view('orders.show')->with('order', $order);
-    //return($order);
-    //return DB::table('order')->join('order_items', 'order_items.order_id', '=', 'orders.id')->where('orders.id', "$order")->get();
-}
+    {
+        //$orders = Order::all();
+        $orders = OrderItem::where('order_id', $orders)->get();
+        //$total = $orders->sum('total()');
+        $total = $orders->map(function ($i) {
+            return $i->product->purchase_price * $i->quantity;
+        })->sum();
+        return view('orders_purchase.show', compact('orders', 'total'));
+        //dd($orders);
+        //return view('orders.show')->with('order', $order);
+        //return($order);
+        //return DB::table('order')->join('order_items', 'order_items.order_id', '=', 'orders.id')->where('orders.id', "$order")->get();
+    }
+
+    public function TransactionDelete($id)
+    {
+
+        $delete = DB::table('orders')->where('id', $id)->delete();
+        if ($delete) {
+            return Redirect()->route('orders.index')->with('success', 'User Berhasil Dihapus!');
+        } else {
+            return Redirect()->route('orders.index')->with('error', 'Oops, ada sesuatu yang Salah!');
+        }
+
+    }
 }
