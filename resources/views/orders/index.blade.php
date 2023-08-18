@@ -78,8 +78,14 @@
 					<a href="#" class="btn btn-warning">
                         <i class="fas fa-print"></i>
                     </a>
+                    @if (Auth::user()->role == 1 )
                     <button class="btn btn btn-danger btn-delete" href="{{ URL::to('delete_order/'.$order->id) }}" id="delete"><i
                         class="fas fa-trash"></i></button>
+                    @endif
+                    @if (Auth::user()->role == 2 )
+                    <button class="btn btn btn-danger btn-delete" href="{{ URL::to('delete_order/'.$order->id) }}" id="delete" disabled><i
+                        class="fas fa-trash"></i></button>
+                    @endif
 					</td>
                 </tr>
                 @endforeach
